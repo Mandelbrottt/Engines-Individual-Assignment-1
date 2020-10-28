@@ -19,13 +19,13 @@ public class CloudController : MonoBehaviour
     public Boundary boundary;
 
     // Start is called before the first frame update
-    void Start()
+	private void Start()
     {
         Reset();
     }
 
     // Update is called once per frame
-    void Update()
+	private void Update()
     {
         Move();
         CheckBounds();
@@ -34,7 +34,7 @@ public class CloudController : MonoBehaviour
     /// <summary>
     /// This method moves the ocean down the screen by verticalSpeed
     /// </summary>
-    void Move()
+	private void Move()
     {
         Vector2 newPosition = new Vector2(horizontalSpeed * Time.deltaTime, verticalSpeed * Time.deltaTime);
         Vector2 currentPosition = transform.position;
@@ -46,22 +46,22 @@ public class CloudController : MonoBehaviour
     /// <summary>
     /// This method resets the ocean to the resetPosition
     /// </summary>
-    void Reset()
+	private void Reset()
     {
         horizontalSpeed = Random.Range(horizontalSpeedRange.min, horizontalSpeedRange.max);
         verticalSpeed = Random.Range(verticalSpeedRange.min, verticalSpeedRange.max);
 
-        float randomXPosition = Random.Range(boundary.Left, boundary.Right);
-        transform.position = new Vector2(randomXPosition, Random.Range(boundary.Top, boundary.Top + 2.0f));
+        float randomXPosition = Random.Range(boundary.left, boundary.right);
+        transform.position = new Vector2(randomXPosition, Random.Range(boundary.top, boundary.top + 2.0f));
     }
 
     /// <summary>
     /// This method checks if the ocean reaches the lower boundary
     /// and then it Resets it
     /// </summary>
-    void CheckBounds()
+	private void CheckBounds()
     {
-        if (transform.position.y <= boundary.Bottom)
+        if (transform.position.y <= boundary.bottom)
         {
             Reset();
         }

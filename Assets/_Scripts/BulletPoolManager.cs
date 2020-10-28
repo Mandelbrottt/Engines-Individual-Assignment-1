@@ -2,37 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Bonus - make this class a Singleton!
-
 [System.Serializable]
-public class BulletPoolManager : MonoBehaviour
-{
-    public GameObject bullet;
+public class BulletPoolManager : Singleton<BulletPoolManager> {
+	[SerializeField]
+	private GameObject bulletPrefab;
 
-    //TODO: create a structure to contain a collection of bullets
+	[SerializeField]
+	private int maxBullets = 10;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // TODO: add a series of bullets to the Bullet Pool
-    }
+	private Queue<GameObject> m_bulletPool;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private int m_numActiveBullets;
 
-    //TODO: modify this function to return a bullet from the Pool
-    public GameObject GetBullet()
-    {
+	public int  NumActiveBullets => m_numActiveBullets;
 
-        return bullet;
-    }
+	public bool IsPoolEmpty => m_numActiveBullets < m_bulletPool.Count;
 
-    //TODO: modify this function to reset/return a bullet back to the Pool 
-    public void ResetBullet(GameObject bullet)
-    {
+	// Start is called before the first frame update
+	private void Start() {
+		BuildBulletPool();
+	}
 
-    }
+	public GameObject GetBullet() {
+		if (m_bulletPool.Count <= 0) {
+			return null;
+		}
+		
+		// Move bullet to back of queue then return a reference to it
+		// When there are no more inactive bullets, calling GetBullet() implicitly retreives
+		// the least recent bullet with no check necessary
+		var bullet = m_bulletPool.Dequeue();
+		m_bulletPool.Enqueue(bullet);
+		
+		bullet.SetActive(true);
+		bullet.transform.position = bulletPrefab.transform.position;
+		bullet.transform.rotation = Quaternion.identity;
+
+		if (m_numActiveBullets < m_bulletPool.Count) {
+			m_numActiveBullets++;
+		}
+		
+		return bullet;
+	}
+
+	public void ResetBullet(GameObject a_bullet) {
+		if (a_bullet == null || !m_bulletPool.Contains(a_bullet)) {
+			return;
+		}
+		
+		a_bullet.SetActive(false);
+		m_numActiveBullets--;
+	}
+
+	private void BuildBulletPool() {
+		m_bulletPool = new Queue<GameObject>(maxBullets);
+		
+		for (var i = 0; i < maxBullets; i++) {
+			m_bulletPool.Enqueue(Instantiate(bulletPrefab, transform));
+		}
+	}
 }

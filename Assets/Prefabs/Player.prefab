@@ -267,13 +267,12 @@ MonoBehaviour:
     max: 0.5
   maxSpeed: 5
   boundary:
-    Top: 0
-    Right: 2.86
-    Bottom: 0
-    Left: -2.86
+    top: 0
+    right: 2.86
+    bottom: 0
+    left: -2.86
   gameController: {fileID: 0}
   bulletSpawn: {fileID: 6513763217427438196}
-  bullet: {fileID: 7008785284576285171, guid: bb06c5ba2d15c2647b82760f50c866d5, type: 3}
 --- !u!1 &6372254964830869977
 GameObject:
   m_ObjectHideFlags: 0

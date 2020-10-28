@@ -8,10 +8,10 @@ namespace Util
     [System.Serializable]
     public class Boundary
     {
-        public float Top;
-        public float Right;
-        public float Bottom;
-        public float Left;
+        public float top;
+        public float right;
+        public float bottom;
+        public float left;
     }
 }
 

@@ -98,10 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalSpeed: 2
   boundary:
-    Top: 2.71
-    Right: 2.88
-    Bottom: -2.71
-    Left: -2.88
+    top: 2.71
+    right: 2.88
+    bottom: -2.71
+    left: -2.88
 --- !u!58 &4480478663996400083
 CircleCollider2D:
   m_ObjectHideFlags: 0

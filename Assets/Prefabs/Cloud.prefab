@@ -105,10 +105,10 @@ MonoBehaviour:
   verticalSpeed: 0
   horizontalSpeed: 0
   boundary:
-    Top: 3.28
-    Right: 2.063
-    Bottom: -3.28
-    Left: -2.063
+    top: 3.28
+    right: 2.063
+    bottom: -3.28
+    left: -2.063
 --- !u!60 &6213664311500089984
 PolygonCollider2D:
   m_ObjectHideFlags: 0

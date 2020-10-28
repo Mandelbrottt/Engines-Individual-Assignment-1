@@ -20,10 +20,10 @@ public class GameController : MonoBehaviour
 
     [Header("Scoreboard")]
     [SerializeField]
-    private int _lives;
+	private int lives;
 
     [SerializeField]
-    private int _score;
+	private int score;
 
     public Text livesLabel;
     public Text scoreLabel;
@@ -44,20 +44,20 @@ public class GameController : MonoBehaviour
     {
         get
         {
-            return _lives;
+            return lives;
         }
 
         set
         {
-            _lives = value;
-            if(_lives < 1)
+            lives = value;
+            if(lives < 1)
             {
                 
                 SceneManager.LoadScene("End");
             }
             else
             {
-                livesLabel.text = "Lives: " + _lives.ToString();
+                livesLabel.text = "Lives: " + lives.ToString();
             }
            
         }
@@ -67,30 +67,30 @@ public class GameController : MonoBehaviour
     {
         get
         {
-            return _score;
+            return score;
         }
 
         set
         {
-            _score = value;
+            score = value;
 
             
-            if (scoreBoard.GetComponent<ScoreBoard>().highScore < _score)
+            if (scoreBoard.GetComponent<ScoreBoard>().highScore < score)
             {
-                scoreBoard.GetComponent<ScoreBoard>().highScore = _score;
+                scoreBoard.GetComponent<ScoreBoard>().highScore = score;
             }
-            scoreLabel.text = "Score: " + _score.ToString();
+            scoreLabel.text = "Score: " + score.ToString();
         }
     }
 
     // Start is called before the first frame update
-    void Start()
+	private void Start()
     {
         GameObjectInitialization();
         SceneConfiguration();
     }
 
-    private void GameObjectInitialization()
+	private void GameObjectInitialization()
     {
         scoreBoard = GameObject.Find("ScoreBoard");
 
@@ -100,8 +100,7 @@ public class GameController : MonoBehaviour
         restartButton = GameObject.Find("RestartButton");
     }
 
-
-    private void SceneConfiguration()
+	private void SceneConfiguration()
     {
         switch (SceneManager.GetActiveScene().name)
         {
@@ -111,7 +110,7 @@ public class GameController : MonoBehaviour
                 highScoreLabel.enabled = false;
                 endLabel.SetActive(false);
                 restartButton.SetActive(false);
-                activeSoundClip = SoundClip.NONE;
+                activeSoundClip = SoundClip.None;
                 break;
             case "Main":
                 highScoreLabel.enabled = false;
@@ -119,14 +118,14 @@ public class GameController : MonoBehaviour
                 startButton.SetActive(false);
                 endLabel.SetActive(false);
                 restartButton.SetActive(false);
-                activeSoundClip = SoundClip.ENGINE;
+                activeSoundClip = SoundClip.Engine;
                 break;
             case "End":
                 scoreLabel.enabled = false;
                 livesLabel.enabled = false;
                 startLabel.SetActive(false);
                 startButton.SetActive(false);
-                activeSoundClip = SoundClip.NONE;
+                activeSoundClip = SoundClip.None;
                 highScoreLabel.text = "High Score: " + scoreBoard.GetComponent<ScoreBoard>().highScore;
                 break;
         }
@@ -135,7 +134,7 @@ public class GameController : MonoBehaviour
         Score = 0;
 
 
-        if ((activeSoundClip != SoundClip.NONE) && (activeSoundClip != SoundClip.NUM_OF_CLIPS))
+        if ((activeSoundClip != SoundClip.None) && (activeSoundClip != SoundClip.NumOfClips))
         {
             AudioSource activeAudioSource = audioSources[(int)activeSoundClip];
             activeAudioSource.playOnAwake = true;
@@ -158,7 +157,7 @@ public class GameController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+	private void Update()
     {
         
     }

@@ -11,13 +11,13 @@ public class IslandController : MonoBehaviour
     public Boundary boundary;
 
     // Start is called before the first frame update
-    void Start()
+	private void Start()
     {
         Reset();
     }
 
     // Update is called once per frame
-    void Update()
+	private void Update()
     {
         Move();
         CheckBounds();
@@ -26,7 +26,7 @@ public class IslandController : MonoBehaviour
     /// <summary>
     /// This method moves the ocean down the screen by verticalSpeed
     /// </summary>
-    void Move()
+	private void Move()
     {
         Vector2 newPosition = new Vector2(0.0f, verticalSpeed * Time.deltaTime);
         Vector2 currentPosition = transform.position;
@@ -38,19 +38,19 @@ public class IslandController : MonoBehaviour
     /// <summary>
     /// This method resets the ocean to the resetPosition
     /// </summary>
-    void Reset()
+	private void Reset()
     {
-        float randomXPosition = Random.Range(boundary.Left, boundary.Right);
-        transform.position = new Vector2(randomXPosition, boundary.Top);
+        float randomXPosition = Random.Range(boundary.left, boundary.right);
+        transform.position = new Vector2(randomXPosition, boundary.top);
     }
 
     /// <summary>
     /// This method checks if the ocean reaches the lower boundary
     /// and then it Resets it
     /// </summary>
-    void CheckBounds()
+	private void CheckBounds()
     {
-        if (transform.position.y <= boundary.Bottom)
+        if (transform.position.y <= boundary.bottom)
         {
             Reset();
         }
